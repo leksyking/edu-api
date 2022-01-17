@@ -1,0 +1,219 @@
+openapi: 3.0.0
+info:
+  title: Edu API
+  contact: {}
+  version: '1.0'
+servers:
+- url: https://edu-api-00.herokuapp.com/api/v1
+  variables: {}
+paths:
+  /auth/register:
+    post:
+      tags:
+      - Auth
+      summary: Register User
+      operationId: RegisterUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterUserRequest'
+            example:
+              name: Leksyking
+              email: ogundipe@gmail.com
+              password: password
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+      - Auth
+      summary: Login User
+      operationId: LoginUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginUserRequest'
+            example:
+              email: opeyemiogundipe09@gmail.com
+              password: password
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /docs:
+    get:
+      tags:
+      - Doc
+      summary: Get All Docs
+      operationId: GetAllDocs
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+      - Doc
+      summary: Create Doc
+      operationId: CreateDoc
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDocRequest'
+            example:
+              Title: Senior Dev
+              Language: Python
+              position: Idiobo
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /docs/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The doc ID
+    get:
+      tags:
+      - Doc
+      summary: Get A Doc
+      operationId: GetADoc
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+
+    patch:
+      tags:
+      - Doc
+      summary: Update Doc
+      operationId: UpdateDoc
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDocRequest'
+            example:
+              Title: Aja nle koko
+              Language: Yoruba
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+      - Doc
+      summary: Delete Doc
+      operationId: DeleteDoc
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+components:
+  schemas:
+    RegisterUserRequest:
+      title: RegisterUserRequest
+      required:
+      - name
+      - email
+      - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: Leksyking
+        email: ogundipe@gmail.com
+        password: password
+    LoginUserRequest:
+      title: LoginUserRequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: opeyemiogundipe09@gmail.com
+        password: password
+    CreateDocRequest:
+      title: CreateDocRequest
+      required:
+      - Title
+      - Language
+      - position
+      type: object
+      properties:
+        Title:
+          type: string
+        Language:
+          type: string
+        position:
+          type: string
+      example:
+        Title: Senior Dev
+        Language: Python
+        position: Idiobo
+    UpdateDocRequest:
+      title: UpdateDocRequest
+      required:
+      - Title
+      - Language
+      type: object
+      properties:
+        Title:
+          type: string
+        Language:
+          type: string
+      example:
+        Title: Aja nle koko
+        Language: Yoruba
+  securitySchemes:
+    httpBearer:
+      type: http
+      scheme: bearer
+security:
+- httpBearer: []
+tags:
+- name: Auth
+  description: ''
+- name: Doc
+  description: ''
